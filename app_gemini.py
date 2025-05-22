@@ -1,5 +1,5 @@
 import streamlit as st
-import pdfplumber  # PyMuPDF
+import pdfplumber  
 import google.generativeai as genai
 
 st.set_page_config(page_title="Analisador de Ofertas - Gemini", layout="wide")
@@ -41,12 +41,17 @@ Para o conteúdo abaixo, organize as informações de forma clara, separando por
 """
 
 # Função para extrair texto do PDF
+import pdfplumber
+from io import BytesIO
+
 def extract_text_from_pdf(file):
-    doc = pdfplumber.open(stream=file.read(), filetype="pdf")
-    text = ""
-    for page in doc:
-        text += page.get_text()
+    with pdfplumber.open(BytesIO(file.read())) as pdf:
+        text = ""
+        for page in pdf.pages:
+            if page.extract_text():
+                text += page.extract_text()
     return text
+
 
 # Botão de análise
 if st.button("🚀 Analisar Oferta"):
