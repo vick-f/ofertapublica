@@ -2,3 +2,5 @@ streamlit
 PyMuPDF
 google-generativeai
 pdfplumber
+pytesseract
+pdf2image
