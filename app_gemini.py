@@ -15,42 +15,37 @@ uploaded_file = st.file_uploader("📎 Upload do PDF da oferta", type=["pdf"])
 
 # Prompt base de análise
 prompt_base = """
-Você é um especialista em finanças. Sua tarefa é extrair e organizar informações específicas de um PDF de uma oferta pública (CRI, CRA ou Debênture), listando **datas exatas como aparecem no documento**.
+Você é um analista financeiro. Receberá a íntegra do texto de uma oferta pública de CRI, CRA ou Debênture, incluindo cronogramas e anexos.
 
-Siga este modelo, preenchendo com todas as informações disponíveis no texto. Não use "ver anexo" nem resumos — **copie diretamente as datas e condições exatas**, mesmo que sejam muitas. Caso alguma informação **realmente não conste no texto**, diga claramente: "não consta".
+Seu papel é **extrair e organizar as informações específicas de cada série da oferta**. Preste atenção especial aos cronogramas (como o Anexo I), pois eles contêm **datas exatas de juros, amortização e vencimento** que devem ser copiadas exatamente.
+
+⚠️ **Não escreva "ver anexo", nem resumos. Extraia e escreva as datas completas no formato DD/MM/AAAA, exatamente como aparecem no texto.**
+
+Se algum campo não estiver no texto, escreva "não consta". Mas se a informação estiver, mesmo em anexo, você deve incluí-la.
 
 ---
 
 🏷️ Identificação da Aplicação
-- Título da aplicação
+- Título
 - Classe (CRI, CRA, Debênture)
 
-💰 Características por Série
-Para cada série, informe:
-- Taxa de remuneração (ex: IPCA + 8,00% a.a., ou 15,50% prefixado, etc.)
-- Juros: periodicidade e **todas as datas exatas de pagamento**
-- Amortização: forma (bullet, parcelas) e **datas exatas**
-- Vencimento final (**data exata**)
-- Risco: rating (se houver) ou análise qualitativa
+💰 Características por Série (para cada uma):
+- Taxa de remuneração
+- Juros: periodicidade e todas as datas
+- Amortização: forma e todas as datas
+- Vencimento final (data exata)
+- Risco ou rating
 
 🗓️ Cronograma da Oferta
-- Início e fim do período de reserva (**datas exatas**)
-- Data do bookbuilding
-- Data de divulgação do resultado
-- Data de liquidação (saída do dinheiro)
+- Início e fim da reserva
+- Bookbuilding
+- Divulgação do resultado
+- Liquidação financeira
 
-⚠️ Destaques
-Liste qualquer detalhe fora do padrão, como:
-- Ausência de rating
-- Carência muito longa
-- Séries subordinadas
-- Uso de índice atípico
-- Outras observações relevantes
-
----
-
-Lembre-se: sua missão é **copiar literalmente as datas, índices e prazos do texto visível**.
+⚠️ Destaques relevantes
+- Qualquer observação fora do padrão da estrutura
 """
+
 
 # Função para extrair texto do PDF
 from io import BytesIO
