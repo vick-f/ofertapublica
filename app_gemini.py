@@ -77,7 +77,7 @@ if st.button("🚀 Analisar Oferta"):
                # Mostrar o texto extraído na tela para conferência
                 st.markdown("### 📝 Texto extraído do PDF (pré-análise)")
                 st.code(pdf_text[:4000])  # Mostra os primeiros 4000 caracteres
-
+                pdf_text = extract_text_from_pdf(uploaded_file)
 
 
                 genai.configure(api_key=api_key)
