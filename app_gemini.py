@@ -74,9 +74,10 @@ if st.button("🚀 Analisar Oferta"):
     else:
         try:
             with st.spinner("Lendo PDF e consultando Gemini..."):
-                # Mostrar o texto extraído na tela para conferência
-                st.markdown("### 📝 Texto extraído do PDF (pré-análise)")
-                st.code(pdf_text[:4000])  # Mostra os primeiros 4000 caracteres
+               # Mostrar o texto extraído na tela para conferência
+                    st.markdown("### 📝 Texto extraído do PDF (pré-análise)")
+                    st.code(pdf_text[:4000])  # Mostra os primeiros 4000 caracteres
+
 
 
                 genai.configure(api_key=api_key)
