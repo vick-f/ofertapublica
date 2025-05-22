@@ -1,5 +1,5 @@
 import streamlit as st
-import fitz  # PyMuPDF
+import pdfplumber  # PyMuPDF
 import google.generativeai as genai
 
 st.set_page_config(page_title="Analisador de Ofertas - Gemini", layout="wide")
