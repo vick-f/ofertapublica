@@ -15,29 +15,41 @@ uploaded_file = st.file_uploader("📎 Upload do PDF da oferta", type=["pdf"])
 
 # Prompt base de análise
 prompt_base = """
-Quero que você atue como um especialista em finanças e analise uma nova oferta pública (CRI, CRA ou Debênture).
+Você é um especialista em finanças. Sua tarefa é extrair e organizar informações específicas de um PDF de uma oferta pública (CRI, CRA ou Debênture), listando **datas exatas como aparecem no documento**.
 
-Para o conteúdo abaixo, organize as informações de forma clara, separando por série sempre que houver mais de uma:
+Siga este modelo, preenchendo com todas as informações disponíveis no texto. Não use "ver anexo" nem resumos — **copie diretamente as datas e condições exatas**, mesmo que sejam muitas. Caso alguma informação **realmente não conste no texto**, diga claramente: "não consta".
+
+---
 
 🏷️ Identificação da Aplicação
 - Título da aplicação
 - Classe (CRI, CRA, Debênture)
 
 💰 Características por Série
-- Taxa de remuneração (prefixada, IPCA+, CDI+, etc.)
-- Juros: periodicidade e liste todas as datas em formato dia/mês/ano exatamente como aparecem no PDF, sem usar frases como 'ver anexo' de pagamento, se a informação não estiver clara, diga explicitamente: 'não consta'
-- Amortização: forma (bullet, parcelas) e liste todas as datas em formato dia/mês/ano exatamente como aparecem no PDF, sem usar frases como 'ver anexo', se a informação não estiver clara, diga explicitamente: 'não consta'
-- Vencimento final (liste todas as datas em formato dia/mês/ano exatamente como aparecem no PDF, sem usar frases como 'ver anexo',se a informação não estiver clara, diga explicitamente: 'não consta')
-- Risco: rating ou análise qualitativa se não houver nota
+Para cada série, informe:
+- Taxa de remuneração (ex: IPCA + 8,00% a.a., ou 15,50% prefixado, etc.)
+- Juros: periodicidade e **todas as datas exatas de pagamento**
+- Amortização: forma (bullet, parcelas) e **datas exatas**
+- Vencimento final (**data exata**)
+- Risco: rating (se houver) ou análise qualitativa
 
 🗓️ Cronograma da Oferta
-- Início e fim do período de reserva (datas exatas do periodo)
+- Início e fim do período de reserva (**datas exatas**)
 - Data do bookbuilding
-- Resultado da alocação
-- Data da liquidação (dinheiro sai da conta)
+- Data de divulgação do resultado
+- Data de liquidação (saída do dinheiro)
 
 ⚠️ Destaques
-- Apontar qualquer detalhe fora do padrão, como carência longa, ausência de rating, série subordinada, etc.
+Liste qualquer detalhe fora do padrão, como:
+- Ausência de rating
+- Carência muito longa
+- Séries subordinadas
+- Uso de índice atípico
+- Outras observações relevantes
+
+---
+
+Lembre-se: sua missão é **copiar literalmente as datas, índices e prazos do texto visível**.
 """
 
 # Função para extrair texto do PDF
