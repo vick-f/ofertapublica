@@ -3,7 +3,7 @@ import fitz  # PyMuPDF
 import google.generativeai as genai
 
 st.set_page_config(page_title="Analisador de Ofertas - Gemini", layout="wide")
-st.title("📄 Analisador de Ofertas Públicas (via Gemini API)")
+st.title("📄 Analisador de Ofertas Públicas")
 
 st.markdown("Faça upload de um PDF e cole sua chave da API Gemini para gerar a ficha da oferta estruturada.")
 
@@ -60,7 +60,7 @@ if st.button("🚀 Analisar Oferta"):
                 pdf_text = extract_text_from_pdf(uploaded_file)
 
                 genai.configure(api_key=api_key)
-                model = genai.GenerativeModel("gemini-pro")
+                model = genai.GenerativeModel("gemini-2.0-flash")
                 response = model.generate_content(prompt_base + "\n\n" + pdf_text)
 
                 st.success("Análise concluída!")
