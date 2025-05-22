@@ -25,9 +25,9 @@ Para o conteúdo abaixo, organize as informações de forma clara, separando por
 
 💰 Características por Série
 - Taxa de remuneração (prefixada, IPCA+, CDI+, etc.)
-- Juros: periodicidade e datas exatas de pagamento
-- Amortização: forma (bullet, parcelas) e datas exatas
-- Vencimento final (data exata)
+- Juros: periodicidade e liste todas as datas em formato dia/mês/ano exatamente como aparecem no PDF, sem usar frases como 'ver anexo' de pagamento, se a informação não estiver clara, diga explicitamente: 'não consta'
+- Amortização: forma (bullet, parcelas) e liste todas as datas em formato dia/mês/ano exatamente como aparecem no PDF, sem usar frases como 'ver anexo', se a informação não estiver clara, diga explicitamente: 'não consta'
+- Vencimento final (liste todas as datas em formato dia/mês/ano exatamente como aparecem no PDF, sem usar frases como 'ver anexo',se a informação não estiver clara, diga explicitamente: 'não consta')
 - Risco: rating ou análise qualitativa se não houver nota
 
 🗓️ Cronograma da Oferta
