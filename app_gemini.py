@@ -31,7 +31,7 @@ Para o conteúdo abaixo, organize as informações de forma clara, separando por
 - Risco: rating ou análise qualitativa se não houver nota
 
 🗓️ Cronograma da Oferta
-- Início e fim do período de reserva (datas exatas)
+- Início e fim do período de reserva (datas exatas do periodo)
 - Data do bookbuilding
 - Resultado da alocação
 - Data da liquidação (dinheiro sai da conta)
@@ -42,7 +42,7 @@ Para o conteúdo abaixo, organize as informações de forma clara, separando por
 
 # Função para extrair texto do PDF
 def extract_text_from_pdf(file):
-    doc = fitz.open(stream=file.read(), filetype="pdf")
+    doc = pdfplumber.open(stream=file.read(), filetype="pdf")
     text = ""
     for page in doc:
         text += page.get_text()
