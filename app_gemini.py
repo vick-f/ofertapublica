@@ -53,16 +53,35 @@ Lembre-se: sua missão é **copiar literalmente as datas, índices e prazos do t
 """
 
 # Função para extrair texto do PDF
-import pdfplumber
 from io import BytesIO
+import pdfplumber
+import pytesseract
+from pdf2image import convert_from_bytes
+from PIL import Image
 
 def extract_text_from_pdf(file):
+    text = ""
+
+    # Primeiro, tentar extrair texto com pdfplumber
     with pdfplumber.open(BytesIO(file.read())) as pdf:
-        text = ""
         for page in pdf.pages:
             if page.extract_text():
-                text += page.extract_text()
+                text += page.extract_text() + "\n"
+
+    # Reiniciar ponteiro do arquivo
+    file.seek(0)
+
+    # Agora OCR (caso algo tenha sido imagem)
+    try:
+        images = convert_from_bytes(file.read(), dpi=300)
+        for i, img in enumerate(images[-3:]):  # Limita ao final (Anexo I geralmente está lá)
+            ocr_text = pytesseract.image_to_string(img, lang="por")
+            text += f"\n\n[OCR - Página {len(images)-2+i}]\n{ocr_text}"
+    except Exception as e:
+        text += f"\n\n[Erro no OCR: {e}]"
+
     return text
+
 
 
 # Botão de análise
